@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbershop Detail</title>
+    <link rel="stylesheet" href="barbershop-detail.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="barbershop-name"></h1>
+        <p id="barbershop-address"></p>
+        <p id="barbershop-description"></p>
+
+        <div id="calendar"></div>
+        <div id="available-hours"></div>
+
+        <form id="booking-form">
+            <input type="hidden" id="selected-date" name="selected-date">
+            <input type="hidden" id="selected-time" name="selected-time">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="surname">Surname:</label>
+            <input type="text" id="surname" name="surname" required>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit" id="book-appointment-btn">Book an Appointment</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
