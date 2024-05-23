@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store</title>
+    <link rel="stylesheet" href="Home.css">
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+</head>
+<body>
+    <header>
+        <h1 id="storeTitle">Store Name</h1>
+    </header>
+    <section>
+        <h2>Available Appointments</h2>
+        <div id="calendar"></div>
+    </section>
+
+    <!-- FullCalendar JS -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pathParts = window.location.pathname.split('/');
+            const storeName = pathParts[pathParts.length - 1];
+            document.getElementById('storeTitle').textContent = storeName;
+
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: [
+                    // Example events
+                    { title: 'Available', start: '2024-05-25', end: '2024-05-26' },
+                    { title: 'Available', start: '2024-05-27' },
+                    { title: 'Booked', start: '2024-05-29', end: '2024-05-30' }
+                ]
+            });
+
+            calendar.render();
+        });
+    </script>
+</body>
+</html>
