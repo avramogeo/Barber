@@ -1,0 +1,219 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: url('PHOTOS/scissors.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+header {
+    background-color: rgba(76, 175, 80, 0.8); /* Semi-transparent background */
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+main {
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    margin: 1rem auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+footer {
+    background-color: #f1f1f1;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Image Gallery Styles */
+.image-gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.image-gallery img {
+    max-height: 200px;
+    border-radius: 10px;
+}
+
+/* Booking Styles */
+.booking-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.calendar-and-hours {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.times-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.time-bubble {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.time-bubble:hover, .time-bubble.selected {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #333;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 1rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="tel"],
+form input[type="email"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+/* Calendar Styles */
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.calendar-day {
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    text-align: center;
+}
+
+.calendar-day:hover, .calendar-day.selected {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.hour-bubble {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.hour-bubble:hover, .hour-bubble.selected {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+#available-hours, #available-times {
+    margin-top: 20px;
+}
+
+#appointment-details p {
+    margin: 5px 0;
+}
+
+#modify-link {
+    display: block;
+    margin-top: 20px;
+    color: #007BFF;
+}
+
+#modify-link:hover {
+    text-decoration: underline;
+}

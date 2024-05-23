@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbershop Detail</title>
+    <link rel="stylesheet" href="[2]DETAILS.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Barbershop</h1>
+    </header>
+    <main>
+        <div class="container">
+            <h1 id="barbershop-name">Barbershop Name</h1>
+            <p id="barbershop-address">Address: Barbershop Address</p>
+            <p id="barbershop-phone">Phone: Barbershop Phone</p>
+            <p id="barbershop-operating-hours">Operating Hours: Barbershop Operating Hours</p>
+            <!-- Remaining HTML content -->
+        </div>
+        
+            <div class="image-gallery">
+                <!-- Add your images here -->
+                <img src="PHOTOS/orestis_1.png" alt="Barbershop Image 1">
+                <img src="PHOTOS/orestis_2.png" alt="Barbershop Image 2">
+                <img src="PHOTOS/orestis_3.png" alt="Barbershop Image 3">
+                <img src="PHOTOS/orestis_4.png" alt="Barbershop Image 4">
+                <img src="PHOTOS/orestis_5.png" alt="Barbershop Image 5">
+                <img src="PHOTOS/orestis_6.png" alt="Barbershop Image 6">
+                <!-- Add more images as needed -->
+            </div>
+
+            <div class="booking-container">
+                <div class="calendar-and-hours">
+                    <div id="calendar"></div>
+                    <div id="available-hours" class="times-grid"></div>
+                </div>
+            </div>
+
+            <form id="booking-form">
+                <input type="hidden" id="selected-date" name="selected-date">
+                <input type="hidden" id="selected-time" name="selected-time">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="surname">Surname:</label>
+                <input type="text" id="surname" name="surname" required>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <button type="submit" id="book-appointment-btn">Book an Appointment</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        &copy; 2024 Barbershop. All rights reserved.
+    </footer>
+    <script src="[1]script.js"></script>
+</body>
+</html>
