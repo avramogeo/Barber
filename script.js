@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const barbershops = [
-        { id: 1, name: "Skalpotas", address: "123 Main St, City A", description: "Kourema... Mpoma!! (Kuriolektika + Metaforika)", availableTimes: ["10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 AM","12:30 AM", "2:00 PM"] },
-        { id: 2, name: "Fotakos XD", address: "456 Elm St, City B", description: "Gria", availableTimes: ["9:00 AM", "12:00 PM", "4:00 PM"] },
-        { id: 3, name: "Asasaki", address: "789 Maple St, City C", description: "Tu eres bonita.", availableTimes: ["11:00 AM", "1:00 PM", "3:00 PM"] }
+        { id: 1, name: "Orestis BarberShop", address: "Georgiou Papandreou 85", phone: "+306955443322", operatingHours: "Mon-Fri: 9:00 AM - 6:00 PM, Sat: 9:00 AM - 3:00 PM, Sun: Closed", availableTimes: ["10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 AM","12:30 AM", "2:00 PM"] },
+        { id: 2, name: "Fotakos XD", address: "456 Elm St, City B",  phone: "987-654-3210", operatingHours: "Mon-Sat: 8:00 AM - 8:00 PM, Sun: 10:00 AM - 5:00 PM", availableTimes: ["9:00 AM", "12:00 PM", "4:00 PM"] },
+        { id: 3, name: "Asasaki", address: "789 Maple St, City C",  phone: "555-123-4567", operatingHours: "Mon-Thu: 10:00 AM - 7:00 PM, Fri-Sat: 10:00 AM - 9:00 PM, Sun: 11:00 AM - 5:00 PM", availableTimes: ["11:00 AM", "1:00 PM", "3:00 PM"] }
     ];
 
     const barbershopList = document.getElementById('barbershop-list');
@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barbershopId && barbershop) {
         document.getElementById('barbershop-name').textContent = barbershop.name;
         document.getElementById('barbershop-address').textContent = `Address: ${barbershop.address}`;
-        document.getElementById('barbershop-description').textContent = `Description: ${barbershop.description}`;
+        document.getElementById('barbershop-phone').textContent = `Phone: ${barbershop.phone}`;
+        document.getElementById('barbershop-operating-hours').textContent = `Operating Hours: ${barbershop.operatingHours}`;
 
         const calendarDiv = document.getElementById('calendar');
         if (calendarDiv) {
