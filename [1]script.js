@@ -1,8 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
     const barbershops = [
-        { id: 1, name: "Orestis BarberShop", address: "Georgiou Papandreou 85", phone: "+306955443322", operatingHours: "Mon-Fri: 9:00 AM - 6:00 PM, Sat: 9:00 AM - 3:00 PM, Sun: Closed", availableTimes: ["10:00 AM","10:30 AM","11:00 AM","11:30 AM","12:00 AM","12:30 AM", "2:00 PM"] },
-        { id: 2, name: "Fotakos XD", address: "456 Elm St, City B",  phone: "987-654-3210", operatingHours: "Mon-Sat: 8:00 AM - 8:00 PM, Sun: 10:00 AM - 5:00 PM", availableTimes: ["9:00 AM", "12:00 PM", "4:00 PM"] },
-        { id: 3, name: "Asasaki", address: "789 Maple St, City C",  phone: "555-123-4567", operatingHours: "Mon-Thu: 10:00 AM - 7:00 PM, Fri-Sat: 10:00 AM - 9:00 PM, Sun: 11:00 AM - 5:00 PM", availableTimes: ["11:00 AM", "1:00 PM", "3:00 PM"] }
+        { 
+            id: 1, 
+            name: "Orestis BarberShop", 
+            address: "Georgiou Papandreou 85", 
+            phone: "123-456-7890", 
+            operatingHours: "Mon-Fri: 9:00 AM - 6:00 PM, Sat: 9:00 AM - 3:00 PM, Sun: Closed", 
+            hairdressers: [
+                { name: "Orestis", availableTimes: ["10:00 AM", "11:00 AM", "1:00 PM"] },
+                { name: "Purosvestis", availableTimes: ["10:30 AM", "12:00 PM", "2:00 PM"] }
+            ]
+        },
+        { 
+            id: 2, 
+            name: "Fotakos XD", 
+            address: "456 Elm St, City B", 
+            phone: "987-654-3210", 
+            operatingHours: "Mon-Sat: 8:00 AM - 8:00 PM, Sun: 10:00 AM - 5:00 PM", 
+            hairdressers: [
+                { name: "Alice Brown", availableTimes: ["9:00 AM", "12:00 PM", "4:00 PM"] },
+                { name: "Bob White", availableTimes: ["11:00 AM", "1:00 PM", "3:00 PM"] }
+            ]
+        },
+        { 
+            id: 3, 
+            name: "Asasaki", 
+            address: "789 Maple St, City C", 
+            phone: "555-123-4567", 
+            operatingHours: "Mon-Thu: 10:00 AM - 7:00 PM, Fri-Sat: 10:00 AM - 9:00 PM, Sun: 11:00 AM - 5:00 PM", 
+            hairdressers: [
+                { name: "Charlie Green", availableTimes: ["11:00 AM", "1:00 PM", "3:00 PM"] },
+                { name: "Diana Black", availableTimes: ["10:00 AM", "2:00 PM", "5:00 PM"] }
+            ]
+        }
     ];
 
     const barbershopList = document.getElementById('barbershop-list');
@@ -72,23 +102,41 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Highlight selected day
                     day.style.backgroundColor = '#4CAF50';
 
-                    // Populate available hours for the selected day
+                    // Populate available hairdressers for the selected day
                     const selectedDate = day.dataset.date;
+                    const availableHairdressersDiv = document.getElementById('available-hairdressers');
                     const availableHoursDiv = document.getElementById('available-hours');
-                    if (availableHoursDiv) {
-                        availableHoursDiv.innerHTML = '';
-                        barbershop.availableTimes.forEach(time => {
-                            const bubble = document.createElement('div');
-                            bubble.classList.add('hour-bubble');
-                            bubble.textContent = time;
-                            bubble.addEventListener('click', () => {
-                                document.querySelectorAll('.hour-bubble').forEach(bubble => {
+                    if (availableHairdressersDiv) {
+                        availableHairdressersDiv.innerHTML = '';
+                        barbershop.hairdressers.forEach(hairdresser => {
+                            const hairdresserBubble = document.createElement('div');
+                            hairdresserBubble.classList.add('hairdresser-bubble');
+                            hairdresserBubble.textContent = hairdresser.name;
+                            hairdresserBubble.addEventListener('click', () => {
+                                // Highlight selected hairdresser
+                                document.querySelectorAll('.hairdresser-bubble').forEach(bubble => {
                                     bubble.classList.remove('selected');
                                 });
-                                bubble.classList.add('selected');
-                                document.getElementById('selected-time').value = time;
+                                hairdresserBubble.classList.add('selected');
+
+                                // Populate available hours for the selected hairdresser
+                                availableHoursDiv.innerHTML = '';
+                                hairdresser.availableTimes.forEach(time => {
+                                    const timeBubble = document.createElement('div');
+                                    timeBubble.classList.add('time-bubble');
+                                    timeBubble.textContent = time;
+                                    timeBubble.addEventListener('click', () => {
+                                        document.querySelectorAll('.time-bubble').forEach(bubble => {
+                                            bubble.classList.remove('selected');
+                                        });
+                                        timeBubble.classList.add('selected');
+                                        document.getElementById('selected-time').value = time;
+                                        document.getElementById('selected-hairdresser').value = hairdresser.name;
+                                    });
+                                    availableHoursDiv.appendChild(timeBubble);
+                                });
                             });
-                            availableHoursDiv.appendChild(bubble);
+                            availableHairdressersDiv.appendChild(hairdresserBubble);
                         });
                     }
                 });
