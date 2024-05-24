@@ -232,3 +232,62 @@ a:hover {
     background-color: #4CAF50;
     color: white;
 }
+
+/* Add general button styles */
+button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Style for hairdresser buttons */
+button.hairdresser-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 2px solid #ddd;
+}
+
+button.hairdresser-btn:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+button.hairdresser-btn:active {
+    background-color: #d0e8ff;
+    transform: scale(1);
+}
+/* Style for selected hairdresser button */
+button.hairdresser-btn.selected {
+    background-color: #4caf50;
+    color: #fff;
+    border-color: #4caf50;
+}
+
+
+/* Style for available hours buttons */
+button.time-btn {
+    background-color: #f0f8ff;
+    color: #333;
+    border: 2px solid #add8e6;
+}
+
+button.time-btn:hover {
+    background-color: #e0efff;
+    transform: scale(1.05);
+}
+
+button.time-btn:active {
+    background-color: #d0e8ff;
+    transform: scale(1);
+}
+
+/* Style for selected buttons */
+button.selected {
+    background-color: #4caf50;
+    color: #fff;
+    border-color: #4caf50;
+}
