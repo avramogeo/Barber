@@ -59,6 +59,51 @@ app.get('/store/:name', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'store.html'));
 });
 
+app.get('/info', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'info.html'));
+});
+
+app.post('/updateStore', (req, res) => {
+    const { storeName, storeAddress, storePhone, storeHours } = req.body;
+    
+    console.log('Received data:', { storeName, storeAddress, storePhone, storeHours });
+
+    // Query to get the store ID based on the store name
+    const selectQuery = 'SELECT id FROM stores WHERE name = ?';
+    connection.query(selectQuery, [storeName], (err, results) => {
+        if (err) {
+            console.error('Error retrieving store ID:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        if (results.length > 0) {
+            const storeId = results[0].id;
+
+            // Proceed to update the store details
+            const updateQuery = 'UPDATE stores SET address = ?, phone = ?, operating_hours = ? WHERE id = ?';
+            connection.query(updateQuery, [storeAddress, storePhone, storeHours, storeId], (err, results) => {
+                if (err) {
+                    console.error('Error updating store information:', err);
+                    res.status(500).send('Internal Server Error');
+                    return;
+                }
+                
+                console.log('Update results:', results);
+                
+                if (results.affectedRows === 0) {
+                    res.status(404).send('Store not found');
+                    return;
+                }
+
+                res.send('Store information updated successfully');
+            });
+        } else {
+            res.status(404).send('Store not found');
+        }
+    });
+});
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);

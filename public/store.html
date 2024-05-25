@@ -5,39 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
     <link rel="stylesheet" href="Home.css">
-    <!-- FullCalendar CSS -->
-    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css' rel='stylesheet' />
+    <style>
+        .store-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .store-container h1 {
+            margin-bottom: 20px;
+        }
+
+        .store-container button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        .store-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 id="storeTitle">Store Name</h1>
-    </header>
-    <section>
-        <h2>Available Appointments</h2>
-        <div id="calendar"></div>
-    </section>
+    <div class="store-container">
+        <h1 id="storeName">Store Name</h1>
+        <button id="changeInfoButton">Change Info</button>
+    </div>
 
-    <!-- FullCalendar JS -->
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js'></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const pathParts = window.location.pathname.split('/');
-            const storeName = pathParts[pathParts.length - 1];
-            document.getElementById('storeTitle').textContent = storeName;
+        // Update store name based on the URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const storeName = urlParams.get('name');
+        document.getElementById('storeName').innerText = storeName;
 
-            var calendarEl = document.getElementById('calendar');
-
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: [
-                    // Example events
-                    { title: 'Available', start: '2024-05-25', end: '2024-05-26' },
-                    { title: 'Available', start: '2024-05-27' },
-                    { title: 'Booked', start: '2024-05-29', end: '2024-05-30' }
-                ]
-            });
-
-            calendar.render();
+        // Redirect to info.html when "Change Info" button is clicked
+        document.getElementById('changeInfoButton').addEventListener('click', function() {
+            window.location.href = '/info';
         });
     </script>
 </body>

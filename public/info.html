@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Store Information</title>
+    <link rel="stylesheet" href="Home.css">
+    <style>
+        .info-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .info-container form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-container input,
+        .info-container button {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .info-container button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        .info-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-container">
+        <h1>Update Store Information</h1>
+        <form id="updateStoreForm">
+            <input type="text" id="storeName" name="storeName" placeholder="Store Name" required>
+            <input type="text" id="storeAddress" name="storeAddress" placeholder="Store Address" required>
+            <input type="text" id="storePhone" name="storePhone" placeholder="Store Phone" required>
+            <input type="text" id="storeHours" name="storeHours" placeholder="Operating Hours" required>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('updateStoreForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const storeName = document.getElementById('storeName').value;
+            const storeAddress = document.getElementById('storeAddress').value;
+            const storePhone = document.getElementById('storePhone').value;
+            const storeHours = document.getElementById('storeHours').value;
+            
+            fetch('/updateStore', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ storeName, storeAddress, storePhone, storeHours })
+            })
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+                // Optionally, you can redirect to another page or reset the form
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
