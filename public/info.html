@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Store Information</title>
+    <title>Info</title>
     <link rel="stylesheet" href="Home.css">
+    <script src="info.js"></script>
     <style>
         .info-container {
-            max-width: 800px;
+            max-width: 600px;
             margin: auto;
             padding: 20px;
-            background-color: white;
+            background-color: #f9f9f9;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        .info-container h1 {
+        .info-container h2 {
             text-align: center;
             margin-bottom: 20px;
         }
@@ -23,63 +24,141 @@
         .info-container form {
             display: flex;
             flex-direction: column;
+            gap: 15px;
         }
 
         .info-container input,
         .info-container button {
-            margin: 10px 0;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            width: 100%;
         }
 
         .info-container button {
             background-color: #4CAF50;
             color: white;
             border: none;
+            cursor: pointer;
         }
 
         .info-container button:hover {
             background-color: #45a049;
         }
+
+        .time-slot-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .time-slot-container label {
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .time-slot-container input[type="checkbox"]:checked + label {
+            background-color: #4CAF50;
+            color: white;
+        }
     </style>
 </head>
 <body>
     <div class="info-container">
-        <h1>Update Store Information</h1>
-        <form id="updateStoreForm">
+        <h2>Update Store Information</h2>
+        <form id="updateForm">
             <input type="text" id="storeName" name="storeName" placeholder="Store Name" required>
             <input type="text" id="storeAddress" name="storeAddress" placeholder="Store Address" required>
             <input type="text" id="storePhone" name="storePhone" placeholder="Store Phone" required>
             <input type="text" id="storeHours" name="storeHours" placeholder="Operating Hours" required>
             <button type="submit">Update</button>
         </form>
+        <h2>Add Hairdresser</h2>
+        <form id="addHairdresserForm">
+            <input type="text" id="hairdresserName" name="hairdresserName" placeholder="Hairdresser Name" required>
+            <input type="date" id="date" name="date" required>
+            <label>Select Available Time Slots:</label><br>
+            <div id="timeSlots" class="time-slot-container">
+                <!-- Time slots will be generated here -->
+            </div>
+            <button type="submit">Add Hairdresser</button>
+        </form>
     </div>
 
     <script>
-        document.getElementById('updateStoreForm').addEventListener('submit', function(event) {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generate time slots
+            const startHour = 9;
+            const endHour = 17;
+            const timeSlots = [];
+            for (let hour = startHour; hour < endHour; hour++) {
+                timeSlots.push(`${String(hour).padStart(2, '0')}:00-${String(hour).padStart(2, '0')}:30`);
+                timeSlots.push(`${String(hour).padStart(2, '0')}:30-${String(hour + 1).padStart(2, '0')}:00`);
+            }
+
+            const timeSlotsContainer = document.getElementById('timeSlots');
+            timeSlots.forEach(slot => {
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = slot;
+                checkbox.name = 'timeSlots';
+                checkbox.value = slot;
+                
+                const label = document.createElement('label');
+                label.htmlFor = slot;
+                label.textContent = slot;
+
+                timeSlotsContainer.appendChild(checkbox);
+                timeSlotsContainer.appendChild(label);
+            });
+        });
+
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            const storeName = document.getElementById('storeName').value;
-            const storeAddress = document.getElementById('storeAddress').value;
-            const storePhone = document.getElementById('storePhone').value;
-            const storeHours = document.getElementById('storeHours').value;
-            
+            const storeData = {
+                storeName: document.getElementById('storeName').value,
+                storeAddress: document.getElementById('storeAddress').value,
+                storePhone: document.getElementById('storePhone').value,
+                storeHours: document.getElementById('storeHours').value,
+            };
+
             fetch('/updateStore', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ storeName, storeAddress, storePhone, storeHours })
+                body: JSON.stringify(storeData)
             })
             .then(response => response.text())
-            .then(data => {
-                alert(data);
-                // Optionally, you can redirect to another page or reset the form
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('addHairdresserForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const timeSlots = Array.from(document.querySelectorAll('input[name="timeSlots"]:checked')).map(el => el.value);
+            const hairdresserData = {
+                hairdresserName: document.getElementById('hairdresserName').value,
+                date: document.getElementById('date').value,
+                timeSlots: timeSlots
+            };
+
+            fetch('/addHairdresser', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(hairdresserData)
             })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
