@@ -101,3 +101,25 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+/* Add styles for the "For Barbers" button */
+header {
+    display: flex;
+    justify-content: space-between; /* Ensures the button aligns to the right */
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+#for-barbers-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#for-barbers-btn:hover {
+    background-color: #45a049;
+}
