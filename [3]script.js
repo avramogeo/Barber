@@ -1,28 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('barber-details-form');
+    const form = document.getElementById('login-form');
 
-    if (form) {
-        form.addEventListener('submit', event => {
-            event.preventDefault(); // Prevent the form from submitting traditionally
-            const formData = new FormData(form);
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
 
-            // Log formData for debugging (or send to a server)
-            console.log('Barbershop Name:', formData.get('name'));
-            console.log('Address:', formData.get('address'));
-            console.log('Hours:', formData.get('hours'));
-            console.log('Photos:', formData.get('photos'));
-            console.log('Hairdressers:', formData.get('hairdressers'));
-
-            // Assuming an endpoint '/add-barbershop' that you would have set up on your server:
-            // fetch('/add-barbershop', {
-            //     method: 'POST',
-            //     body: formData
-            // })
-            // .then(response => response.json())
-            // .then(data => alert('Barbershop added successfully!'))
-            // .catch(error => console.error('Error:', error));
-
-            alert('Barbershop details submitted!'); // Placeholder feedback
-        });
-    }
+        // Simulate checking credentials (You will need to implement server-side verification)
+        if (username === "correctUsername" && password === "correctPassword") {
+            // Redirect to the BARBER page if correct
+            window.location.href = '[4]BARBER.html';
+        } else {
+            alert('Invalid credentials!');
+        }
+    });
 });
