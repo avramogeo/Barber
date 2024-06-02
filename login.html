@@ -84,12 +84,15 @@
                     // Show the error message and the sign-up button if login fails
                     document.getElementById('errorMessage').style.display = 'block';
                     document.getElementById('signUpButton').classList.remove('hidden');
-                    document.getElementById('signUpButton').classList.add('visible');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
+        });
+
+        document.getElementById('signUpButton').addEventListener('click', function() {
+            window.location.href = '/signup';
         });
     </script>
 </body>

@@ -59,6 +59,58 @@ app.get('/store/:name', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'store.html'));
 });
 
+app.get('/info', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'info.html'));
+});
+
+app.post('/updateStore', (req, res) => {
+    const { storeName, storeAddress, storePhone, storeHours } = req.body;
+
+    const query = 'UPDATE stores SET name = ?, address = ?, phone = ?, operating_hours = ? WHERE name = ?';
+    connection.query(query, [storeName, storeAddress, storePhone, storeHours, storeName], (err, results) => {
+        if (err) {
+            console.error('Error updating store:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        console.log('Store updated:', results);
+        res.send('Store information updated successfully');
+    });
+});
+
+app.post('/addHairdresser', (req, res) => {
+    const { hairdresserName, date, timeSlots } = req.body;
+
+    const insertHairdresserQuery = 'INSERT INTO hairdressers (name) VALUES (?)';
+    connection.query(insertHairdresserQuery, [hairdresserName], (err, results) => {
+        if (err) {
+            console.error('Error adding hairdresser:', err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        const hairdresserId = results.insertId;
+
+        const insertAvailableSlotsQuery = 'INSERT INTO available_slots (hairdresser_id, date, start_time, end_time) VALUES ?';
+        const values = timeSlots.map(slot => {
+            const [start_time, end_time] = slot.split('-');
+            return [hairdresserId, date, start_time, end_time];
+        });
+
+        connection.query(insertAvailableSlotsQuery, [values], (err, results) => {
+            if (err) {
+                console.error('Error adding available slots:', err);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+
+            console.log('Available slots added:', results);
+            res.send('Hairdresser and available hours added successfully');
+        });
+    });
+});
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
